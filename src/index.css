@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+@import '@fontsource/big-shoulders-display/latin-700';
+@import '@fontsource/big-shoulders-display/latin-800';
+@import '@fontsource/big-shoulders-display/latin-900';
+@import '@fontsource/figtree/latin-400';
+@import '@fontsource/figtree/latin-500';
+@import '@fontsource/figtree/latin-600';
+@import '@fontsource/figtree/latin-700';
+@import '@fontsource/figtree/latin-800';
+@import '@fontsource/yellowtail/latin-400';
+
+@theme {
+  --color-carvao: #15110c;
+  --color-carvao-2: #241c12;
+  --color-oleo: #6b3f0c;
+  --color-dourado: #e8a90e;
+  --color-dourado-claro: #f7c948;
+  --color-massa: #f7d27a;
+  --color-casca: #c97a17;
+  --color-papel: #fff9ec;
+  --color-papel-2: #f6ecd2;
+  --color-tinta: #2a2116;
+  --color-tinta-suave: #6e5e48;
+  --color-tomate: #c23b22;
+
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
+  --font-script: 'Yellowtail', cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-dourado);
+  outline-offset: 2px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bolhas do óleo subindo */
+@keyframes bolha {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-70px) scale(1.15);
+    opacity: 0;
+  }
+}
+.bolha {
+  animation: bolha var(--dur, 2.6s) ease-in infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Onda do óleo */
+@keyframes onda {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.onda {
+  animation: onda var(--dur, 7s) linear infinite;
+}
+
+/* Vapor */
+@keyframes vapor {
+  0% {
+    transform: translateY(10px) scaleX(1);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(-60px) scaleX(1.6);
+    opacity: 0;
+  }
+}
+.vapor {
+  animation: vapor var(--dur, 3.4s) ease-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Linha pontilhada das bebidas */
+.pontilhado {
+  background-image: radial-gradient(circle, var(--color-tinta-suave) 1px, transparent 1.4px);
+  background-size: 7px 7px;
+  background-position: 0 center;
+  background-repeat: repeat-x;
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bolha,
+  .onda,
+  .vapor {
+    animation: none;
+  }
+  .bolha,
+  .vapor {
+    opacity: 0;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
